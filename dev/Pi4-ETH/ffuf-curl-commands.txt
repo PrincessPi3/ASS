@@ -1,0 +1,7 @@
+ffuf -w Metacharacters.fuzzdb.txt -u "http://172.0.0.1/get?email=FUZZ\&password=%00%00" -H "FUZZ:FUZZ" -mc all -ac -rate 60
+curl -i "http://192.168.4.1/get?email=one%00one\&password=two%00two" #-i dumps headers
+curl -i --raw "http://192.168.4.1/get?email=one%00one\&password=two`printf \0`two"
+ffuf -w /usr/share/wordlists/john.lst -u "http://192.168.4.1/get?email=FUZZ&password=FUZZ" -fc all -rate 60
+ffuf -w /usr/share/wordlists/john.lst -u "http://192.168.4.1/get?email=FUZZ&password=FUZZ" -fc all -rate 4 -t 1 
+ffuf -w /usr/share/wordlists/seclists/Fuzzing/big-list-of-naughty-strings.txt -u "http://192.168.4.1/get?email=FUZZ&password=FUZZ" -fc all -rate 4 -t 1
+ffuf -w /usr/share/wordlists/seclists/Fuzzing/big-list-of-naughty-strings.txt -u "http://192.168.4.1/get?email=FUZZ&password=FUZZ" -fc all -rate 4 -t 2

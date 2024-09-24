@@ -1,0 +1,1 @@
+source boofuzz/env/bin/activate

@@ -1,0 +1,23 @@
+#!/bin/bash
+number=2
+tag=incremental-overrun-nullbyte
+blocks=32
+blocksize=1M
+dumpsize=32M
+
+
+
+echo -e "\nListing Disks"
+lsblk
+echo -e "\nEnter disk (e.x. sda or sdb - BE CAREFUL)"
+read disk
+block=/dev/$disk
+
+timestamp=$(date "+%d%m%Y-%H.%M.%S-%Z")
+
+filename="/home/kali/marauderexploitdev/imgs/${number}-${tag}-${dumpsize}-${timestamp}.img"
+
+echo -e "\nWriting to ${filename}"
+sudo dd if=$block of=$filename bs=$blocksize count=$blocks status=progress conv=fdatasync
+
+echo -e "\n\nDONE\n\nWritten to: ${filename}\n\n"

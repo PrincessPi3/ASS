@@ -1,0 +1,44 @@
+#!/bin/bash
+mountpoint=/mnt/MARAUDLABEL/
+gb_to_zero=4
+# full_wipe=True
+copy_files=True
+
+echo "WILL WIPE DISK USE WITH CARE"
+
+echo -e "\nListing Disks"
+lsblk
+echo -e "\nEnter disk (e.x. sda or sdb - BE CAREFUL)"
+read disk
+block="/dev/${disk}"
+if [ -z $full_wipe ]; then
+	echo -e "\nZeroing ${gb_to_zero}GB on Disk $block"
+	sudo dd if=/dev/zero of=$block status=progress bs=1M count="${gb_to_zero}K" conv=fdatasync
+else
+	echo -e "\nZeroing FULL Disk $block"
+	sudo dd if=/dev/zero of=$block status=progress bs=32M conv=fdatasync
+fi
+
+echo -e "\nCreating Partitions on $block"
+sudo echo ',,b;' | sudo sfdisk $block
+echo -e "\n\nEnter Disk (e.x. sda1 or sdb1)"
+lsblk
+read part
+partition="/dev/${part}"
+echo -e "\nMaking FAT32 Filesystem on $partition"
+sudo mkfs.vfat -F 32 -n MARAUDERSD $partition
+echo -e "\n$block Status:"
+sudo sfdisk -l $block
+echo -e "\nMounting $partition at $mountpoint"
+sudo mount $partition $mountpoint
+if [ ! -z $copy_files ]; then
+	echo -e "\nCopying Minimal Files"
+	sudo cp marauder_cyd_microsd/index.html $mountpoint
+	sudo cp marauder_cyd_microsd/ap.config.txt $mountpoint
+	echo -e "\nListing"
+	ls -lah $mountpoint
+	echo -e "\numounting $partition from $mountpoint"
+	sudo umount $mountpoint
+fi
+echo -e "\n\nYou May Now Use on Marauder"
+

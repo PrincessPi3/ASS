@@ -1,0 +1,27 @@
+#!/bin/bash
+wifi_device=wlan1
+ssid=Guest-WiFi
+# password=
+# deletei=True
+
+echo "Interface $wifi_device"
+echo "Disconnecting"
+sudo nmcli d disconnect $wifi_device
+
+if [ ! -z $deletei ]; then	
+	echo "Deleting Wifi Profiles"
+	sudo nmcli connection show | sudo awk '{system("nmcli connection delete " $1)}'
+	echo "Sleeping 3 Seconds"
+	sleep 3
+fi
+
+sudo nmcli dev wifi rescan
+
+echo "Connecting to $ssid"
+if [ -z $password ]; then
+	sudo nmcli device wifi connect $ssid ifname $wifi_device
+else
+	sudo nmcli device wifi connect $ssid password $password ifname $wifi_device
+fi
+
+ifconfig $wifi_device
