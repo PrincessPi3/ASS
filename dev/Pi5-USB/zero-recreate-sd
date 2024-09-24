@@ -1,7 +1,7 @@
 #!/bin/bash
 mountpoint=/mnt/MARAUDLABEL/
 gb_to_zero=1
-full_wipe=True
+# full_wipe=True
 copy_files=True
 
 echo "WILL WIPE DISK USE WITH CARE"
