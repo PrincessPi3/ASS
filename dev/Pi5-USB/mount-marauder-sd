@@ -1,1 +1,6 @@
-sudo mount /dev/`echo $1`1 /mnt/MARAUDLABEL
+lsblk
+echo -e "\nSelect A Disk (sda1, sdb1, etc)"
+read disk
+sudo mount /dev/$disk /mnt/MARAUDLABEL
+echo -e "\n/mnt/MARAUDLABEL\n"
+ls -lah /mnt/MARAUDLABEL

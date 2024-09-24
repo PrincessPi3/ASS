@@ -3,9 +3,10 @@ import subprocess
 import time
 
 # host = "http://10.0.0.80"
-host = "http://192.168.4.1"
+# host = "http://192.168.4.1"
+host = "http://172.0.0.1"
 rangei = 10000
-char = "X"
+char = "%00%FF"
 # char = "%00"
 prepend = ""
 append = ""
@@ -35,7 +36,7 @@ for x in range(rangei+1):
 	payload = f"{prepend}{chars}{append}"
 	uri = f"{host}/get?email={payload}&password={payload}"
 	command = f"{curl_cmd} '{uri}' >> {outfile}"
-	print(f"Running {x}/{rangei} chars ({char})\n\tPrepend: {prepend}\n\tAppend: {append}\n\Outfile: {outfile}\n")
+	print(f"Running {x}/{rangei} chars ({char})\n\tPrepend: {prepend}\n\tAppend: {append}\nOutfile: {outfile}\n")
 	with open(outfile, "a") as log:
 		log.write(f"\n\n{x}/{rangei} - Char: {char} - Prepend: {prepend} - Append: {append}\n")
 	p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)

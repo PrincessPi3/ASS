@@ -2,10 +2,11 @@ import datetime
 import subprocess
 import time
 
-host = "http://10.0.0.80"
+# host = "http://10.0.0.80"
 # host = "http://192.168.4.1"
-charlen = 1489
-char = "%00"
+host = "http://172.0.0.1"
+charlen = 750
+char = "%00%FF"
 prepend = ""
 append = ""
 
