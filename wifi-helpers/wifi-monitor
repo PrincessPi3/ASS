@@ -1,0 +1,9 @@
+if [ -z $1 ]; then
+    dev=wlan1
+else
+    dev=$1
+fi
+
+sudo airmon-ng check kill
+sudo airmon-ng start $dev
+sudo airmon-ng 

@@ -1,1 +1,5 @@
+# start venv
 source boofuzz/env/bin/activate
+
+# toexit
+deactivate

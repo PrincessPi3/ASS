@@ -30,7 +30,8 @@ def sendRandBytesBeacons(numOfBeacons=200, lenOfSSIDs=20, repeat=3, interval=0.1
 		sendProbe(SSID, repeat, interval)
 
 def sendProbeFuzz(repeat=1, interval=0.150):
-	randMAC = RandMAC()
+	randMAC = '6e:07:9e:96:2b:4e'
+	# randMAC = RandMAC()
 	randLen = RandNum(0, 255)
 	randSSIDLen = random.randint(0,255)
 	randSSIDBytes = random.randbytes(randSSIDLen)
