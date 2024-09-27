@@ -1,9 +1,9 @@
 #!/bin/bash
-number=2
-tag=incremental-overrun-nullbyte
-blocks=32
+number=0
+tag=fresh
+blocks=75
 blocksize=1M
-dumpsize=32M
+dumpsize=75M
 
 
 
@@ -15,7 +15,7 @@ block=/dev/$disk
 
 timestamp=$(date "+%d%m%Y-%H.%M.%S-%Z")
 
-filename="/home/kali/marauderexploitdev/imgs/${number}-${tag}-${dumpsize}-${timestamp}.img"
+filename="./imgs/${number}-${tag}-${dumpsize}-${timestamp}.img"
 
 echo -e "\nWriting to ${filename}"
 sudo dd if=$block of=$filename bs=$blocksize count=$blocks status=progress conv=fdatasync
