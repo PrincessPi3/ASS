@@ -75,6 +75,39 @@ def sendRandBytesBeaconsRaw(
 		print(f"\n{i} of {numOfBeacons}\n\tRepeats: {repeat}\n\tListed Length: {listedLen}\n\tReal Length: {lenOfSSIDs}\n\tInterval: {interval} Seconds\n\tSSID: {urlEncoded}")
 		sendProbeRaw(SSID, repeat, interval, listedLen)
 
+
+
 #sendRandBytesBeaconsRaw(numOfBeacons=100, lenOfSSIDs=1, listedLen=255, repeat=3, interval=0.15)
 #sendRandBytesBeacons(100, 20, 5, 0.1)
-sendFuzzBeacons()
+
+
+def fullFuzz(
+	numOfBeacons=200,
+	repeat=3,
+	interval=0.150):
+
+	for i in range(numOfBeacons):
+		realLenSSID = random.randint(0,255)
+		SSID = random.randbytes(realLenSSID)
+		urlEncoded = urllib.parse.quote(SSID)
+		fakeLenSSID = random.randint(0,255)
+		senderMAC = RandMAC()
+
+		dot11 = Dot11(type=0, subtype=8,
+				addr1='ff:ff:ff:ff:ff:ff',
+				addr2=senderMAC,
+				addr3=senderMAC)
+		
+		beacon = Dot11Beacon()
+
+		essid = Dot11Elt(ID='SSID',
+				   info=SSID,
+				   len=fakeLenSSID)
+					
+		frame = RadioTap()/dot11/beacon/essid
+		
+		print(f"\n{i}/{numOfBeacons}\n\tEach Repeats: {repeat}\n\tReal Length: {realLenSSID}\n\tFake Length: {fakeLenSSID}\n\tSender MAC: {senderMAC}\n\tSSID: {urlEncoded}\n")
+
+		sendp(frame, iface=iface, inter=interval, count=repeat)
+
+fullFuzz()
