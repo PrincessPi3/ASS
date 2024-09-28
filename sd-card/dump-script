@@ -1,9 +1,16 @@
 #!/bin/bash
 number=0
+<<<<<<< HEAD:sd-card-helpers/dump-script
 tag=full-fuzz
 blocks=100
 blocksize=1M
 dumpsize=100M
+=======
+tag=fresh
+blocks=75
+blocksize=1M
+dumpsize=75M
+>>>>>>> 74ecdcb053840a8ffeeb1fd63d6789a9f4ef29eb:sd-card/dump-script
 
 
 
