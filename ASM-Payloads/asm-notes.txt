@@ -1,0 +1,33 @@
+xtensa-esp32-elf-as --warn --fatal-warnings first.s -o first.o
+xtensa-esp32-elf-objdump -d second.o
+
+second.o:     file format elf32-xtensa-le
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:   000021          l32r    a2, fffc0000 <_start+0xfffc0000>
+   3:   0002a0          jx      a2
+                                              
+jx-addr.o:     file format elf32-xtensa-le
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	f03d      	nop.n
+   2:	f03d      	nop.n
+   4:	f03d      	nop.n
+   6:	000021        	l32r	a2, fffc0008 <_start+0xfffc0008>
+   9:	0002a0        	jx	a2
+   c:	f03d      	nop.n
+   e:	f03d      	nop.n
+  10:	f03d      	nop.n
+
+
+nop.n
+\xF0\x3D
+
+full sequence:
+   \xF0\x3D\xF0\x3D\xF0\x3D\x00\x00\x21\xF0\x3D\xF0\x3D\xF0\x3D

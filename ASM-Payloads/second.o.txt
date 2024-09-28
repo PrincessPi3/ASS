@@ -1,0 +1,9 @@
+
+second.o:     file format elf32-xtensa-le
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	000021        	l32r	a2, fffc0000 <_start+0xfffc0000>
+   3:	0002a0        	jx	a2
