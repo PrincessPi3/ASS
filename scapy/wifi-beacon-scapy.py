@@ -29,6 +29,6 @@ def beacon_normie(SSID):
 #SSID =  b"YOU-SEEM-FUNDAMETALLY-FUN\x00\x0AI-THINK-ID-LIKE-TO-KNOW-YOU\x00\x0AI-FEEL-LIKE-BEING-YOUR-FRIEND\x00\x0AI-AM-YOUR-PONY-WAIFU\x0a\x00\xc6\x54\x00"
 ##SSID ="your-pony-waifu-desu~-desu~-desu~-\xF0\x3D\xF0\x3D\xF0\x3D\x00\x00\x21\xF0\x3D\xF0\x3D\xF0\x3D"
 mostImportantPart = b'pony-waifu-loves-you-too-have-some-binary='
-binaryFun = 0b1
+binaryFun = 0b101010 # binary underflow exploit 100% original oc donut steal
 SSID = binaryFun
 beacon_raw(SSID, length=255)
