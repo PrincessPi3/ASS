@@ -1,2 +1,0 @@
-xtensa-esp32-elf-as --warn --fatal-warnings first.s -o first.o
-xtensa-esp32-elf-objdump -d second.o
